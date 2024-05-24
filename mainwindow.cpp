@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QTimer>
+
 
 void check_game_over(MainWindow* m);
 
@@ -10,6 +12,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    // Disable the maximize button
+    setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
+
+    // Make the window non-resizable
+    setFixedSize(size());
+
     QPushButton *numButton [15];
     for(int i=1; i<16;i++){ // add the event of the buttons
         QString butname = "pushButton_" + QString::number(i); // get buttons by
@@ -18,10 +28,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 
+    timer = new QTimer(this);   // create a timer
     connect(ui->actionNew_Game,SIGNAL(triggered()), this, SLOT(new_Game()));  // link new game menu button to code
     connect(ui->actionExit,SIGNAL(triggered()), this, SLOT(quit()));
     connect(ui->actionAbout,SIGNAL(triggered()), this, SLOT(About()));
-
+    connect(timer, &QTimer::timeout, this, &MainWindow::onTimerTimeout);
 
 
     // set where is the gap at the begining of the game
@@ -33,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete timer;
 }
 
 
@@ -70,6 +82,8 @@ void MainWindow::new_Game(){
     }
 
     new_game = false;
+    QMessageBox::information(this ,"Game15" , "Game is begun! You have 5 minutes"  );
+    timer->start(300000);
 
 }
 
@@ -96,7 +110,17 @@ void check_game_over(MainWindow* m){
 
     if (count==15){
       QMessageBox::information(m,"" , "Game over! \n You solved it! Good Job!"  );
+        if (m->timer->isActive()) {
+          m->timer->stop();
+      }
     }
 }
 
 
+void MainWindow::onTimerTimeout(){
+    if (timer->isActive()) {
+        timer->stop();
+    }
+    QMessageBox::information(this,"Game15" , "Time is up! Unfortunately, you didn't solve it. Try another one!"  );
+    new_Game();
+}

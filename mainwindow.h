@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QTimer *timer;
 
 private:
     Ui::MainWindow *ui;
@@ -29,5 +30,7 @@ private slots:
     void new_Game();
     void About();
     void quit();
+    void onTimerTimeout();
+
 };
 #endif // MAINWINDOW_H
