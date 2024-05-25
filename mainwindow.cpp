@@ -20,6 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
     // Make the window non-resizable
     setFixedSize(size());
 
+
+    // Set the window icon
+    setWindowIcon(QIcon(":/icon.png"));
+
+
     QPushButton *numButton [15];
     for(int i=1; i<16;i++){ // add the event of the buttons
         QString butname = "pushButton_" + QString::number(i); // get buttons by
