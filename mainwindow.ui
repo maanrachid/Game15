@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>325</width>
-    <height>350</height>
+    <height>364</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -434,6 +434,19 @@
      <string>15</string>
     </property>
    </widget>
+   <widget class="QLabel" name="timegame">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>322</y>
+      <width>37</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Time</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -441,7 +454,7 @@
      <x>0</x>
      <y>0</y>
      <width>325</width>
-     <height>26</height>
+     <height>17</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

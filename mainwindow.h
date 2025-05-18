@@ -17,12 +17,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QTimer *timer;
+    QTimer *SecTimer;
 
 private:
     Ui::MainWindow *ui;
     int Gapx;
     int Gapy;
     bool new_game;
+    int SecCounter;
 
 
 private slots:
@@ -31,6 +33,7 @@ private slots:
     void About();
     void quit();
     void onTimerTimeout();
+    void updateSecTime();
 
 };
 #endif // MAINWINDOW_H
